@@ -42,4 +42,9 @@ io.on("connection", socket => {
 
         io.emit("messagesLogs", messages);
     });
+
+    socket.on("userConnect", data => {
+        socket.emit("messagesLogs", messages);
+        socket.broadcast.emit("newUser", data);
+    });
 });

@@ -16,6 +16,8 @@ Swal.fire({
 }).then(result => {
     user = result.value;
     console.log(`Tu nombre de usuario es ${user}`);
+
+    socket.emit("userConnect", user);
 });
 
 chatBox.addEventListener("keypress", e => {
@@ -42,3 +44,11 @@ socket.on("messagesLogs", data => {
 
     messagesLogs.innerHTML = messages;
 });
+
+socket.on("newUser", data => {
+    Swal.fire({
+        text: `${data} se ha unido al chat`,
+        toast: true,
+        position: "top-right"
+    })
+})
